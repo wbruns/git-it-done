@@ -12,6 +12,23 @@ var getUserRepos = function(user) {
   });
 };
 
+var userFormEl = document.querySelector("#user-form");
+var nameInputEl = document.querySelector("#username");
 
+// on form submission browser event
+var formSubmitHandler = function(event) {
+  event.preventDefault();
+  // get value from input element
+  var username = nameInputEl.value.trim();
+  // if there is a username
+  if (username) {
+    getUserRepos(username);
+    // clear the input
+    nameInputEl.value = "";
+  } else {
+    alert("Please enter a GitHub username");
+  }
+};
 
-getUserRepos("wbruns");
+// submit event listener
+userFormEl.addEventListener("submit", formSubmitHandler);
