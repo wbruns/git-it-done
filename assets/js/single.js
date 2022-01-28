@@ -2,6 +2,22 @@
 var issueContainerEl = document.querySelector("#issues-container");
 // parent element for pagination limit warning
 var limitWarningEl = document.querySelector("#limit-warning");
+// selecting the header
+var repoNameEl = document.querySelector("#repo-name");
+
+var getRepoName = function() {
+  // get the query string from url
+  var queryString = document.location.search;
+
+  // split string to get 'owner/repo'
+  var repoName = queryString.split("=")[1];
+
+  // pass repoName to getRepoIssues
+  getRepoIssues(repoName);
+
+  // display repoName in header
+  repoNameEl.textContent = repoName;
+};
 
 var getRepoIssues = function(repo) {
   // end point for a repo's issues, oldest first
@@ -77,4 +93,4 @@ var displayWarning = function(repo) {
   limitWarningEl.appendChild(linkEl);
 };
 
-getRepoIssues("facebook/react");
+getRepoName();
