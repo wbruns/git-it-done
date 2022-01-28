@@ -12,11 +12,16 @@ var getRepoName = function() {
   // split string to get 'owner/repo'
   var repoName = queryString.split("=")[1];
 
-  // pass repoName to getRepoIssues
-  getRepoIssues(repoName);
-
-  // display repoName in header
-  repoNameEl.textContent = repoName;
+  // check for valid repo name
+  if (repoName) {
+    // display repoName in header
+    repoNameEl.textContent = repoName;
+    // pass repoName to getRepoIssues
+    getRepoIssues(repoName);
+  } else {
+    // if no repo was given, redirect to the homepage
+    document.location.replace("./index.html");
+  }
 };
 
 var getRepoIssues = function(repo) {
@@ -36,7 +41,8 @@ var getRepoIssues = function(repo) {
         }
       });
     } else {
-      alert("There was a problem with your request!");
+      // if not successful, redirect to homepage
+      document.location.replace("./index.html");
     }
   });  
 };
